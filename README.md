@@ -45,6 +45,7 @@ Vùng dữ liệu: hàng 3 → hàng 300 (298 phản hồi).
 Phát hiện trọng tâm của bài: một ô nhập nhầm 152 000 bước làm **AVERAGE lệch 488 bước**, trong khi **MEDIAN chỉ lệch 4 bước**.
 
 ## Lưu ý kỹ thuật
+- Phần nhiệm vụ **không in sẵn công thức**. Học sinh làm sai ô nào thì ô đó tô đỏ và chỉ ô đó hiện gợi ý công thức; câu chọn sai cũng tô đỏ riêng.
 - Website không cần backend. Họ tên và lớp lưu trong `localStorage` (khóa `excelClean2Student`).
 - PDF tạo từ ảnh minh chứng bằng jsPDF tải từ CDN; nếu mạng chặn CDN, học sinh vẫn tải được bản PNG.
 - Ô nhập kết quả chấp nhận cả dấu phẩy và dấu chấm thập phân, có hoặc không có dấu phân cách hàng nghìn (`6573,56`, `6573.56`, `1.952.348`, `1952348` đều được chấp nhận).
