@@ -123,12 +123,12 @@ footer{padding:26px 0 50px;color:var(--muted);font-size:13px;text-align:center}
 <section class="hero">
   <span class="eyebrow">TIN HỌC 8 · BÀI 2</span>
   <h1>Thám tử số liệu</h1>
-  <p class="lead">5 chặng thử thách: làm sạch dữ liệu rồi dùng 7 hàm thống kê cơ bản để bắt tận tay những con số đã nói dối. Mỗi chặng phải làm đúng mới mở được chặng sau.</p>
+  <p class="lead">5 chặng: làm sạch dữ liệu rồi dùng 7 hàm cơ bản để bắt tận tay những con số nói dối. Làm đúng chặng này mới mở được chặng sau.</p>
 </section>
 
 <!-- ============ BẮT ĐẦU ============ -->
 <section class="section active" id="step0">
-  <div class="head"><div class="badge">0</div><div><h2>Bắt đầu</h2><p class="sub">Nhập thông tin để hệ thống ghi nhận minh chứng hoàn thành.</p></div></div>
+  <div class="head"><div class="badge">0</div><div><h2>Bắt đầu</h2><p class="sub">Điền tên và lớp để nhận giấy chứng nhận khi làm xong.</p></div></div>
 
   <div class="callout blue">
     <strong>Chuẩn bị trước khi vào chặng 1</strong><br>
@@ -147,13 +147,13 @@ footer{padding:26px 0 50px;color:var(--muted);font-size:13px;text-align:center}
 
 <!-- ============ CHẶNG 1 ============ -->
 <section class="section" id="step1">
-  <div class="head"><div class="badge">1</div><div><h2>Bốn thủ phạm làm bẩn dữ liệu</h2><p class="sub">Nhận diện lỗi trước khi tính bất cứ con số nào.</p></div></div>
+  <div class="head"><div class="badge">1</div><div><h2>Bốn thủ phạm làm bẩn dữ liệu</h2><p class="sub">Tìm cho ra lỗi trước khi tính bất cứ con số nào.</p></div></div>
 
   <div class="grid2">
     <div class="card"><h3>① Ô trống (Missing)</h3><p>Người trả lời bỏ qua câu hỏi. Ô trống <strong>không phải số 0</strong>. Excel bỏ qua ô trống khi tính AVERAGE, nên số bạn trả lời thật sự ít hơn tổng số phản hồi.</p></div>
-    <div class="card"><h3>② Số lưu dạng văn bản</h3><p>Ô ghi <span class="fx">3,2</span> hoặc <span class="fx">3.2 giờ</span> bị Excel hiểu là chữ. Dấu hiệu: nội dung <strong>căn lề trái</strong> thay vì phải. Hàm SUM và AVERAGE sẽ bỏ qua những ô này.</p></div>
+    <div class="card"><h3>② Số bị ghi thành chữ</h3><p>Ô ghi <span class="fx">3,2</span> hoặc <span class="fx">3.2 giờ</span> bị Excel hiểu là chữ. Dấu hiệu: nội dung <strong>căn lề trái</strong> thay vì phải. Hàm SUM và AVERAGE sẽ bỏ qua những ô này.</p></div>
     <div class="card"><h3>③ Giá trị vô lý</h3><p>Con số không thể có thật: ngủ 25 giờ/đêm, điểm 87 trên thang 10, đi 152 000 bước/ngày. Đây là lỗi nhập liệu, không phải phát hiện thú vị.</p></div>
-    <div class="card"><h3>④ Bản ghi nghi trùng</h3><p>Hai dòng giống hệt nhau ở mọi cột. Có thể một người gửi hai lần — nhưng cũng có thể là hai bạn tình cờ trả lời giống nhau.</p></div>
+    <div class="card"><h3>④ Dòng bị nhập trùng</h3><p>Hai dòng giống hệt nhau ở mọi cột. Có thể một người gửi hai lần — nhưng cũng có thể là hai bạn tình cờ trả lời giống nhau.</p></div>
   </div>
 
   <div class="callout warn">
@@ -186,22 +186,22 @@ footer{padding:26px 0 50px;color:var(--muted);font-size:13px;text-align:center}
     <p class="ahint">Sáu trường hợp lấy từ sheet <span class="fx">Data</span> của chính bộ dữ liệu khối 8. Chọn đúng loại vấn đề cho từng trường hợp.</p>
     <div class="matchGrid" id="match1">
       <div class="term">Ô C4 ghi <span class="fx">3,2</span> và căn về lề trái</div>
-      <select data-key="text"><option value="">Chọn...</option><option value="blank">Ô trống</option><option value="text">Số lưu dạng văn bản</option><option value="crazy">Giá trị vô lý</option><option value="dup">Bản ghi nghi trùng</option><option value="fine">Không phải lỗi</option></select>
+      <select data-key="text"><option value="">Chọn...</option><option value="blank">Ô trống</option><option value="text">Số bị ghi thành chữ</option><option value="crazy">Giá trị vô lý</option><option value="dup">Dòng bị nhập trùng</option><option value="fine">Không phải lỗi</option></select>
 
       <div class="term">Ô F34 (giờ vận động của R053) không có gì</div>
-      <select data-key="blank"><option value="">Chọn...</option><option value="blank">Ô trống</option><option value="text">Số lưu dạng văn bản</option><option value="crazy">Giá trị vô lý</option><option value="dup">Bản ghi nghi trùng</option><option value="fine">Không phải lỗi</option></select>
+      <select data-key="blank"><option value="">Chọn...</option><option value="blank">Ô trống</option><option value="text">Số bị ghi thành chữ</option><option value="crazy">Giá trị vô lý</option><option value="dup">Dòng bị nhập trùng</option><option value="fine">Không phải lỗi</option></select>
 
       <div class="term">Ô H103 ghi điểm trung bình lớp 7 là <span class="fx">87</span></div>
-      <select data-key="crazy"><option value="">Chọn...</option><option value="blank">Ô trống</option><option value="text">Số lưu dạng văn bản</option><option value="crazy">Giá trị vô lý</option><option value="dup">Bản ghi nghi trùng</option><option value="fine">Không phải lỗi</option></select>
+      <select data-key="crazy"><option value="">Chọn...</option><option value="blank">Ô trống</option><option value="text">Số bị ghi thành chữ</option><option value="crazy">Giá trị vô lý</option><option value="dup">Dòng bị nhập trùng</option><option value="fine">Không phải lỗi</option></select>
 
       <div class="term">Ô G33 ghi <span class="fx">152000</span> bước chân mỗi ngày</div>
-      <select data-key="crazy"><option value="">Chọn...</option><option value="blank">Ô trống</option><option value="text">Số lưu dạng văn bản</option><option value="crazy">Giá trị vô lý</option><option value="dup">Bản ghi nghi trùng</option><option value="fine">Không phải lỗi</option></select>
+      <select data-key="crazy"><option value="">Chọn...</option><option value="blank">Ô trống</option><option value="text">Số bị ghi thành chữ</option><option value="crazy">Giá trị vô lý</option><option value="dup">Dòng bị nhập trùng</option><option value="fine">Không phải lỗi</option></select>
 
       <div class="term">Hai dòng R245 và R257 giống nhau ở cả 10 cột</div>
-      <select data-key="dup"><option value="">Chọn...</option><option value="blank">Ô trống</option><option value="text">Số lưu dạng văn bản</option><option value="crazy">Giá trị vô lý</option><option value="dup">Bản ghi nghi trùng</option><option value="fine">Không phải lỗi</option></select>
+      <select data-key="dup"><option value="">Chọn...</option><option value="blank">Ô trống</option><option value="text">Số bị ghi thành chữ</option><option value="crazy">Giá trị vô lý</option><option value="dup">Dòng bị nhập trùng</option><option value="fine">Không phải lỗi</option></select>
 
       <div class="term">Ô B34 ghi giờ ngủ là <span class="fx">4.5</span> — thấp hơn hẳn các bạn khác</div>
-      <select data-key="fine"><option value="">Chọn...</option><option value="blank">Ô trống</option><option value="text">Số lưu dạng văn bản</option><option value="crazy">Giá trị vô lý</option><option value="dup">Bản ghi nghi trùng</option><option value="fine">Không phải lỗi</option></select>
+      <select data-key="fine"><option value="">Chọn...</option><option value="blank">Ô trống</option><option value="text">Số bị ghi thành chữ</option><option value="crazy">Giá trị vô lý</option><option value="dup">Dòng bị nhập trùng</option><option value="fine">Không phải lỗi</option></select>
     </div>
     <div class="feedback" id="fb1"></div>
     <div class="btnrow"><button class="btn btnPrimary" id="action1">Kiểm tra</button></div>
@@ -247,7 +247,7 @@ footer{padding:26px 0 50px;color:var(--muted);font-size:13px;text-align:center}
 
 <!-- ============ CHẶNG 3 ============ -->
 <section class="section" id="step3">
-  <div class="head"><div class="badge">3</div><div><h2>Hai cách đếm: COUNT và COUNTA</h2><p class="sub">Chặng đầu tiên em phải mở Excel và tự tính.</p></div></div>
+  <div class="head"><div class="badge">3</div><div><h2>Hai cách đếm: COUNT và COUNTA</h2><p class="sub">Từ chặng này em phải mở Excel ra và tự tính.</p></div></div>
 
   <div class="grid2">
     <div class="card"><h3>COUNT — đếm ô chứa <em>số</em></h3><p>Chỉ đếm những ô có giá trị số. Ô trống, ô chữ, ô số lưu dạng văn bản đều bị bỏ qua.</p></div>
@@ -281,7 +281,7 @@ footer{padding:26px 0 50px;color:var(--muted);font-size:13px;text-align:center}
 
 <!-- ============ CHẶNG 4 ============ -->
 <section class="section" id="step4">
-  <div class="head"><div class="badge">4</div><div><h2>SUM, AVERAGE, MAX, MIN</h2><p class="sub">Bốn hàm quen thuộc — và cách dùng MAX/MIN để bắt lỗi.</p></div></div>
+  <div class="head"><div class="badge">4</div><div><h2>SUM, AVERAGE, MAX, MIN</h2><p class="sub">Bốn hàm quen thuộc — và mẹo dùng MAX, MIN để bắt lỗi.</p></div></div>
 
   <div class="grid2">
     <div class="card"><h3>SUM · tổng</h3><p>Cộng toàn bộ giá trị số trong một vùng — ví dụ tổng số bước chân của cả 298 bạn.</p></div>
@@ -305,7 +305,7 @@ footer{padding:26px 0 50px;color:var(--muted);font-size:13px;text-align:center}
     </div>
     <div class="matchGrid" style="margin-top:14px">
       <div class="term">Trên <span class="fx">Clean_Data</span>, <span class="fx">=SUM(B3:B300)/298</span> cho 7.09 còn <span class="fx">=AVERAGE(B3:B300)</span> cho 7.21. Vì sao lệch nhau?</div>
-      <select id="why4" data-key="c"><option value="">Chọn...</option><option value="a">Vì SUM làm tròn số trước khi cộng</option><option value="b">Vì AVERAGE tính cả hàng tiêu đề nên bị dư một giá trị</option><option value="c">Vì cột B có 5 ô trống: AVERAGE chia cho 293 bạn thật sự trả lời, còn phép chia cho 298 coi 5 bạn không trả lời như ngủ 0 giờ</option><option value="d">Vì hai công thức luôn cho kết quả khác nhau, đây là chuyện bình thường</option></select>
+      <select id="why4" data-key="c"><option value="">Chọn...</option><option value="a">Vì SUM làm tròn số trước khi cộng</option><option value="b">Vì AVERAGE tính cả hàng tiêu đề nên bị dư một giá trị</option><option value="c">Vì cột B có 5 ô trống: AVERAGE chỉ chia cho 293 bạn có trả lời, còn chia cho 298 là coi 5 bạn bỏ trống như ngủ 0 giờ</option><option value="d">Vì hai công thức luôn cho kết quả khác nhau, đây là chuyện bình thường</option></select>
 
       <div class="term">Kết quả MAX ở hai câu trên nói lên điều gì về sheet <span class="fx">Data</span>?</div>
       <select id="why4b" data-key="b"><option value="">Chọn...</option><option value="a">Có một bạn học rất giỏi và một bạn ngủ rất nhiều</option><option value="b">Có ít nhất hai ô nhập sai: điểm 87 vượt thang điểm 10 và 25 giờ ngủ vượt số giờ của một ngày</option><option value="c">Dữ liệu vẫn tốt, chỉ là hai bạn đặc biệt</option><option value="d">Excel tính sai hàm MAX</option></select>
@@ -345,7 +345,7 @@ footer{padding:26px 0 50px;color:var(--muted);font-size:13px;text-align:center}
       <select id="why5" data-key="b"><option value="">Chọn...</option><option value="a">Cả AVERAGE và MEDIAN đều bị con số 152 000 làm lệch như nhau</option><option value="b">AVERAGE lệch gần 500 bước vì một ô sai, còn MEDIAN gần như không đổi</option><option value="c">MEDIAN lệch nhiều hơn AVERAGE</option><option value="d">Làm sạch dữ liệu không ảnh hưởng gì đến kết quả thống kê</option></select>
 
       <div class="term">Vậy khi báo cáo số bước chân trung bình của khối 8, nên làm gì?</div>
-      <select id="why5b" data-key="a"><option value="">Chọn...</option><option value="a">Làm sạch dữ liệu trước, và báo cáo kèm cả trung vị để người đọc thấy dữ liệu có bị ngoại lệ kéo lệch hay không</option><option value="b">Dùng luôn dữ liệu gốc cho nhanh, sai số không đáng kể</option><option value="c">Chỉ báo cáo giá trị lớn nhất vì nó ấn tượng nhất</option><option value="d">Xóa hết những bạn có số bước chân cao hơn trung bình</option></select>
+      <select id="why5b" data-key="a"><option value="">Chọn...</option><option value="a">Làm sạch dữ liệu trước, rồi ghi kèm cả trung vị để người đọc biết có con số lạ nào kéo lệch hay không</option><option value="b">Dùng luôn dữ liệu gốc cho nhanh, sai số không đáng kể</option><option value="c">Chỉ báo cáo giá trị lớn nhất vì nó ấn tượng nhất</option><option value="d">Xóa hết những bạn có số bước chân cao hơn trung bình</option></select>
     </div>
     <button class="hintBtn" data-hint="hint5">Cần gợi ý?</button>
     <div class="hintBox hidden" id="hint5">Làm lần lượt: bấm tab <span class="fx">Data</span>, gõ hai công thức, ghi kết quả ra giấy. Rồi bấm tab <span class="fx">Clean_Data</span>, gõ đúng hai công thức đó. Vùng <span class="fx">G3:G300</span> giống nhau ở cả hai sheet.</div>
@@ -356,7 +356,7 @@ footer{padding:26px 0 50px;color:var(--muted);font-size:13px;text-align:center}
 
 <!-- ============ KIỂM TRA CUỐI ============ -->
 <section class="section" id="step6">
-  <div class="head"><div class="badge">✓</div><div><h2>Kiểm tra cuối bài</h2><p class="sub">10 câu ngẫu nhiên từ cả 5 chặng. Đạt 8/10 để nhận minh chứng hoàn thành.</p></div></div>
+  <div class="head"><div class="badge">✓</div><div><h2>Kiểm tra cuối bài</h2><p class="sub">10 câu lấy ngẫu nhiên từ cả 5 chặng. Đúng từ 8/10 là nhận được giấy chứng nhận.</p></div></div>
   <div id="quizArea">
     <div class="quizHead"><span class="qnum" id="qnum">Câu 1/10</span><span class="tiny">Mỗi câu chỉ trả lời một lần</span></div>
     <p class="qtext" id="qtext"></p>
@@ -508,19 +508,19 @@ setStageAction('action5','fb5',6,()=>stageCheck('task5',['why5','why5b'],
 
 /* ================= NGÂN HÀNG CÂU HỎI ================= */
 const BANK=[
- {type:'mcq',q:'Ô C4 ghi "3,2" và nội dung căn về lề trái. Đây là lỗi gì?',options:[['Số lưu dạng văn bản','k'],['Ô trống','x'],['Giá trị vô lý','x'],['Bản ghi trùng','x']],key:'k'},
+ {type:'mcq',q:'Ô C4 ghi "3,2" và nội dung căn về lề trái. Đây là lỗi gì?',options:[['Số bị ghi thành chữ','k'],['Ô trống','x'],['Giá trị vô lý','x'],['Dòng bị nhập trùng','x']],key:'k'},
  {type:'mcq',q:'Một bạn ghi giờ ngủ mỗi đêm là 25. Cách xử lý đúng theo nguyên tắc làm sạch dữ liệu là gì?',options:[['Để trống ô đó và ghi lý do vào nhật ký làm sạch','k'],['Sửa thành 12 giờ cho hợp lý','x'],['Xóa luôn cả dòng phản hồi đó','x'],['Giữ nguyên vì đó là dữ liệu người ta trả lời','x']],key:'k'},
- {type:'mcq',q:'Trong bộ dữ liệu khối 8, một bạn ghi ngủ 4.5 giờ mỗi đêm — thấp hơn hẳn các bạn khác. Nên làm gì?',options:[['Giữ nguyên, vì hiếm nhưng vẫn có thể xảy ra','k'],['Để trống vì con số quá thấp','x'],['Thay bằng giá trị trung bình của cả lớp','x'],['Xóa dòng đó khỏi bảng','x']],key:'k'},
+ {type:'mcq',q:'Trong bộ dữ liệu khối 8, một bạn ghi ngủ 4.5 giờ mỗi đêm — thấp hơn hẳn các bạn khác. Nên làm gì?',options:[['Giữ nguyên, vì hiếm nhưng vẫn có thể xảy ra','k'],['Để trống vì con số quá thấp','x'],['Thay bằng điểm trung bình của cả lớp','x'],['Xóa dòng đó khỏi bảng','x']],key:'k'},
  {type:'mcq',q:'Hàm nào đếm được cả ô chứa chữ lẫn ô chứa số?',options:[['COUNTA','k'],['COUNT','x'],['SUM','x'],['MEDIAN','x']],key:'k'},
  {type:'mcq',q:'Cột A chứa mã phản hồi R001, R002… Công thức =COUNT(A3:A300) trả về kết quả nào?',options:[['0','k'],['298','x'],['300','x'],['Báo lỗi #VALUE!','x']],key:'k'},
- {type:'mcq',q:'Trên một cột đáng lẽ toàn số, COUNTA cho 298 còn COUNT cho 293. Điều đó cho biết gì?',options:[['Có 5 ô đang bị lưu dạng văn bản chứ không phải số','k'],['Có 5 ô trống hoàn toàn','x'],['Cột đó có 5 giá trị vô lý','x'],['Công thức đã gõ sai vùng dữ liệu','x']],key:'k'},
+ {type:'mcq',q:'Trên một cột đáng lẽ toàn số, COUNTA cho 298 còn COUNT cho 293. Điều đó cho biết gì?',options:[['Có 5 ô đang bị ghi thành chữ chứ không phải số','k'],['Có 5 ô trống hoàn toàn','x'],['Cột đó có 5 giá trị vô lý','x'],['Công thức đã gõ sai vùng dữ liệu','x']],key:'k'},
  {type:'mcq',q:'Dữ liệu bắt đầu ở hàng 3 và kết thúc ở hàng 300. Vùng nào đúng cho cột G?',options:[['G3:G300','k'],['G1:G300','x'],['G2:G299','x'],['G3:G299','x']],key:'k'},
  {type:'mcq',q:'Vì sao không nên đưa hàng 2 vào vùng tính toán?',options:[['Vì hàng 2 chứa tên cột chứ không phải dữ liệu','k'],['Vì Excel không tính được hàng 2','x'],['Vì hàng 2 luôn bị khóa','x'],['Vì như vậy sẽ thiếu mất một phản hồi','x']],key:'k'},
- {type:'mcq',q:'Gõ SUM(G3:G300) mà không có dấu bằng ở đầu thì Excel sẽ làm gì?',options:[['Hiểu đó là một đoạn chữ và hiển thị nguyên văn','k'],['Vẫn tính ra tổng bình thường','x'],['Báo lỗi #DIV/0!','x'],['Tự động thêm dấu bằng vào','x']],key:'k'},
+ {type:'mcq',q:'Gõ SUM(G3:G300) mà không có dấu bằng ở đầu thì Excel sẽ làm gì?',options:[['Hiểu đó là một đoạn chữ và hiện lại y nguyên','k'],['Vẫn tính ra tổng bình thường','x'],['Báo lỗi #DIV/0!','x'],['Tự động thêm dấu bằng vào','x']],key:'k'},
  {type:'mcq',q:'Cột B có 5 ô trống trong tổng số 298 hàng dữ liệu. Hàm =AVERAGE(B3:B300) chia tổng cho bao nhiêu?',options:[['293','k'],['298','x'],['300','x'],['5','x']],key:'k'},
  {type:'mcq',q:'Muốn biết trong một cột có giá trị nhập sai kiểu "điểm 87 trên thang 10" hay không, nên dùng hàm nào trước tiên?',options:[['MAX và MIN','k'],['SUM và AVERAGE','x'],['COUNT và COUNTA','x'],['MEDIAN','x']],key:'k'},
  {type:'mcq',q:'Một ô nhập nhầm 152 000 bước chân/ngày còn nằm trong dữ liệu. Hàm nào bị con số đó làm lệch nhiều nhất?',options:[['AVERAGE','k'],['MEDIAN','x'],['COUNT','x'],['COUNTA','x']],key:'k'},
- {type:'mcq',q:'MEDIAN của một cột là gì?',options:[['Giá trị đứng giữa khi xếp toàn bộ giá trị từ nhỏ đến lớn','k'],['Giá trị xuất hiện nhiều lần nhất','x'],['Trung bình cộng của giá trị lớn nhất và nhỏ nhất','x'],['Tổng chia cho số phần tử','x']],key:'k'},
+ {type:'mcq',q:'MEDIAN của một cột là gì?',options:[['Con số đứng giữa khi xếp tất cả các số từ nhỏ đến lớn','k'],['Con số xuất hiện nhiều lần nhất','x'],['Trung bình cộng của số lớn nhất và số nhỏ nhất','x'],['Tổng chia cho số phần tử','x']],key:'k'},
  {type:'mcq',q:'Trên dữ liệu bẩn, trung bình số bước chân là 7061.6; sau khi làm sạch còn 6573.6. Trung vị thì đổi từ 6 606 xuống 6 602. Kết luận nào đúng?',options:[['Trung vị ổn định hơn trung bình khi dữ liệu có giá trị cực đoan','k'],['Trung bình luôn chính xác hơn trung vị','x'],['Cả hai hàm đều bị ảnh hưởng như nhau','x'],['Làm sạch dữ liệu không thay đổi kết quả','x']],key:'k'},
  {type:'mcq',q:'Nếu báo cáo số bước chân trung bình mà không làm sạch dữ liệu trước, hậu quả là gì?',options:[['Kết luận về cả khối bị sai lệch vì một ô nhập nhầm','k'],['Không sao cả, một ô không ảnh hưởng gì','x'],['Excel sẽ tự động cảnh báo','x'],['Kết quả vẫn đúng nhưng chạy chậm hơn','x']],key:'k'},
  {type:'mcq',q:'Hai dòng R245 và R257 giống hệt nhau ở cả 10 cột trong một khảo sát ẩn danh. Cách xử lý phù hợp nhất là gì?',options:[['Giữ cả hai và ghi chú lại, vì chưa đủ bằng chứng kết luận cùng một người','k'],['Xóa ngay một dòng','x'],['Xóa cả hai dòng cho chắc','x'],['Sửa vài giá trị cho hai dòng khác nhau','x']],key:'k'},
@@ -592,7 +592,7 @@ function finishQuiz(){
     document.getElementById('pdfBtn').onclick=downloadPDF;
     document.getElementById('retryBtn').onclick=startQuiz;
   }else{
-    r.innerHTML=`<div class="callout warn"><strong>Kết quả: ${state.score}/10</strong><br>Cần đạt từ 8/10 để nhận minh chứng hoàn thành.</div>${review}<div class="btnrow"><button class="btn btnSecondary" id="reviewBtn">Xem lại các chặng</button><button class="btn btnPrimary" id="retryBtn">Làm lại</button></div>`;
+    r.innerHTML=`<div class="callout warn"><strong>Kết quả: ${state.score}/10</strong><br>Cần đúng từ 8/10 mới nhận được giấy chứng nhận.</div>${review}<div class="btnrow"><button class="btn btnSecondary" id="reviewBtn">Xem lại các chặng</button><button class="btn btnPrimary" id="retryBtn">Làm lại</button></div>`;
     document.getElementById('reviewBtn').onclick=()=>showStep(1);
     document.getElementById('retryBtn').onclick=startQuiz;
   }
