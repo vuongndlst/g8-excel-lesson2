@@ -79,12 +79,11 @@ input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 4px rgba(49,9
 .task input.good{border-color:var(--green);box-shadow:0 0 0 4px rgba(15,157,122,.12)}
 .task input.wrong{border-color:var(--red);box-shadow:0 0 0 4px rgba(180,35,24,.1)}
 .task.miss{border-color:#fecdca;background:#fffbfa}
-.hintFx{display:none;margin-top:8px;font-family:ui-monospace,"Cascadia Mono",Consolas,monospace;background:#fff7ed;border:1px solid #fed7aa;color:#8a3c05;border-radius:9px;padding:5px 10px;font-size:12.5px;font-weight:800}
-.task.miss .hintFx{display:inline-block}
-.hintFx::before{content:"Gợi ý: ";font-family:inherit}
 select.selWrong{border-color:var(--red);box-shadow:0 0 0 4px rgba(180,35,24,.1)}
 .hintBtn{background:none;border:0;color:var(--blue);font-size:12px;font-weight:850;cursor:pointer;padding:6px 0}
 .hintBox{font-size:13px;color:#475467;background:#f8fafc;border-radius:11px;padding:10px 12px;margin-top:8px;line-height:1.55}
+.hintLevel+.hintLevel{border-top:1px solid var(--line);margin-top:8px;padding-top:8px}
+.noCopy{-webkit-user-select:none;user-select:none}
 .pill{display:inline-flex;padding:6px 9px;border-radius:99px;background:var(--green2);color:#126a56;font-size:12px;font-weight:850}
 .pill.amber{background:var(--amber2);color:#8a3c05}
 .steps{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
@@ -132,9 +131,10 @@ footer{padding:26px 0 50px;color:var(--muted);font-size:13px;text-align:center}
 
   <div class="callout blue">
     <strong>Chuẩn bị trước khi vào chặng 1</strong><br>
-    Mở file <span class="fx">LSTS_KhaoSat_K8_2026_AnDanh_Cleaned.xlsx</span> (tải trên Canvas). File có 3 sheet:
-    <span class="fx">Data</span> – dữ liệu gốc còn lỗi · <span class="fx">Clean_Data</span> – dữ liệu đã làm sạch · <span class="fx">Cleaning_Log</span> – nhật ký xử lý.<br>
-    Từ chặng 3 trở đi, em <strong>tính trên Excel rồi gõ kết quả vào trang này</strong>. Trang web chỉ mở chặng sau khi kết quả đúng.
+    Mở file <span class="fx">LSTS_KhaoSat_K8_2026_AnDanh_Cleaned.xlsx</span> (tải trên Canvas). Em chỉ cần hai sheet đang hiện:
+    <span class="fx">Data</span> – dữ liệu gốc còn lỗi · <span class="fx">Clean_Data</span> – dữ liệu đã làm sạch. Sheet nhật ký đã được ẩn vì bài này không yêu cầu dùng.<br>
+    Từ chặng 3 trở đi, đọc yêu cầu tại khối <strong>cột M:P</strong>, gõ công thức vào <strong>ô vàng cùng hàng</strong>, rồi nhập kết quả lên web. Với số trung bình, nhập đúng <strong>2 chữ số thập phân đang hiển thị trong ô</strong>; có thể dùng dấu phẩy hoặc dấu chấm.<br>
+    <strong>Tùy chọn, không bắt buộc:</strong> nếu muốn làm tròn ngay trong công thức, em có thể dùng cấu trúc <span class="fx">ROUND(kết_quả, 2)</span>.
   </div>
 
   <div class="formGrid">
@@ -203,6 +203,8 @@ footer{padding:26px 0 50px;color:var(--muted);font-size:13px;text-align:center}
       <div class="term">Ô B34 ghi giờ ngủ là <span class="fx">4.5</span> — thấp hơn hẳn các bạn khác</div>
       <select data-key="fine"><option value="">Chọn...</option><option value="blank">Ô trống</option><option value="text">Số bị ghi thành chữ</option><option value="crazy">Giá trị vô lý</option><option value="dup">Dòng bị nhập trùng</option><option value="fine">Không phải lỗi</option></select>
     </div>
+    <button class="hintBtn" data-hint="hint1">Cần gợi ý?</button>
+    <div class="hintBox noCopy hidden" id="hint1"><div class="hintLevel hidden"><strong>Gợi ý 1:</strong> So từng giá trị với ý nghĩa của cột: ô trống, dữ liệu chữ, giá trị không thể xảy ra, hay hai dòng giống nhau.</div><div class="hintLevel hidden"><strong>Gợi ý 2:</strong> “Hiếm” chưa chắc sai. Chỉ chọn giá trị vô lý khi nó vượt giới hạn thực tế hoặc thang đo; hai dòng trùng cần giống nhau ở toàn bộ cột được nêu.</div></div>
     <div class="feedback" id="fb1"></div>
     <div class="btnrow"><button class="btn btnPrimary" id="action1">Kiểm tra</button></div>
   </div>
@@ -229,7 +231,7 @@ footer{padding:26px 0 50px;color:var(--muted);font-size:13px;text-align:center}
     <p class="ahint">Cả 4 câu đều làm trên sheet <span class="fx">Clean_Data</span>.</p>
     <div class="matchGrid" id="match2">
       <div class="term">Tính trung bình cột <em>Giờ ngủ mỗi đêm</em> (cột B)</div>
-      <select data-key="a"><option value="">Chọn...</option><option value="a">=AVERAGE(B3:B300)</option><option value="b">=AVERAGE(B2:B300)</option><option value="c">AVERAGE(B3:B300)</option><option value="d">=AVERAGE(B3;B300)</option></select>
+      <select data-key="a"><option value="">Chọn...</option><option value="a">=AVERAGE(B3:B300)</option><option value="b">=AVERAGE(B2:B300)</option><option value="c">AVERAGE(B3:B300)</option><option value="d">=AVERAGE(B3:B299)</option></select>
 
       <div class="term">Vùng nào chứa đúng 298 phản hồi của cột <em>Số bước chân</em> (cột G)?</div>
       <select data-key="a"><option value="">Chọn...</option><option value="a">G3:G300</option><option value="b">G1:G300</option><option value="c">G2:G299</option><option value="d">G3:G298</option></select>
@@ -240,6 +242,8 @@ footer{padding:26px 0 50px;color:var(--muted);font-size:13px;text-align:center}
       <div class="term">Vì sao không nên dùng vùng <span class="fx">B2:B300</span>?</div>
       <select data-key="b"><option value="">Chọn...</option><option value="a">Vì thiếu mất phản hồi cuối cùng</option><option value="b">Vì hàng 2 là tên cột, không phải dữ liệu</option><option value="c">Vì Excel không cho phép vùng bắt đầu từ hàng 2</option><option value="d">Vì vùng phải luôn bắt đầu từ hàng 1</option></select>
     </div>
+    <button class="hintBtn" data-hint="hint2">Cần gợi ý?</button>
+    <div class="hintBox noCopy hidden" id="hint2"><div class="hintLevel hidden"><strong>Gợi ý 1:</strong> Kiểm tra lần lượt ba thành phần: dấu bằng, đúng tên hàm, đúng vùng dữ liệu.</div><div class="hintLevel hidden"><strong>Gợi ý 2:</strong> Dữ liệu bắt đầu ở hàng 3 và kết thúc ở hàng 300. Dấu hai chấm nối ô đầu với ô cuối của một vùng.</div></div>
     <div class="feedback" id="fb2"></div>
     <div class="btnrow"><button class="btn btnSecondary" id="back2">← Chặng 1</button><button class="btn btnPrimary" id="action2">Kiểm tra</button></div>
   </div>
@@ -261,19 +265,19 @@ footer{padding:26px 0 50px;color:var(--muted);font-size:13px;text-align:center}
 
   <div class="activity">
     <h3>Thử thách 3 · Đếm trên dữ liệu thật</h3>
-    <p class="ahint">Mở sheet <span class="fx">Clean_Data</span>, gõ công thức vào một ô trống bất kỳ rồi chép kết quả vào đây.</p>
+    <p class="ahint">Mở sheet <span class="fx">Clean_Data</span>, tìm khối yêu cầu ở cột <span class="fx">M:P</span>, gõ công thức vào ô vàng cùng hàng rồi chép kết quả vào đây.</p>
     <div class="taskGrid" id="task3">
-      <div class="task"><div class="q"><b>Có bao nhiêu phản hồi trong bảng?</b><span class="hintFx">=COUNTA(A3:A300)</span></div><input data-ans="298" data-tol="0" inputmode="numeric" placeholder="kết quả"></div>
-      <div class="task"><div class="q"><b>Bây giờ đếm cùng cột đó bằng COUNT</b><span class="hintFx">=COUNT(A3:A300)</span></div><input data-ans="0" data-tol="0" inputmode="numeric" placeholder="kết quả"></div>
-      <div class="task"><div class="q"><b>Cột Giờ vận động/tuần có bao nhiêu bạn trả lời?</b><span class="hintFx">=COUNT(F3:F300)</span></div><input data-ans="291" data-tol="0" inputmode="numeric" placeholder="kết quả"></div>
-      <div class="task"><div class="q"><b>Còn cột Giờ ngủ mỗi đêm?</b><span class="hintFx">=COUNT(B3:B300)</span></div><input data-ans="293" data-tol="0" inputmode="numeric" placeholder="kết quả"></div>
+      <div class="task"><div class="q"><b>Có bao nhiêu phản hồi trong bảng?</b></div><input data-ans="298" data-tol="0" inputmode="numeric" placeholder="kết quả"></div>
+      <div class="task"><div class="q"><b>Bây giờ đếm cùng cột đó bằng COUNT</b></div><input data-ans="0" data-tol="0" inputmode="numeric" placeholder="kết quả"></div>
+      <div class="task"><div class="q"><b>Cột Giờ vận động/tuần có bao nhiêu bạn trả lời?</b></div><input data-ans="291" data-tol="0" inputmode="numeric" placeholder="kết quả"></div>
+      <div class="task"><div class="q"><b>Còn cột Giờ ngủ mỗi đêm?</b></div><input data-ans="293" data-tol="0" inputmode="numeric" placeholder="kết quả"></div>
     </div>
     <div class="matchGrid" style="margin-top:14px">
       <div class="term">Vì sao <span class="fx">=COUNT(A3:A300)</span> trả về 0 trong khi cột A rõ ràng có 298 ô?</div>
       <select id="why3" data-key="b"><option value="">Chọn...</option><option value="a">Vì cột A bị lỗi, cần nhập lại toàn bộ</option><option value="b">Vì mã phản hồi (R001…) là dữ liệu chữ, mà COUNT chỉ đếm ô số</option><option value="c">Vì vùng A3:A300 nằm ngoài bảng dữ liệu</option><option value="d">Vì COUNT chỉ đếm được tối đa 255 ô</option></select>
     </div>
     <button class="hintBtn" data-hint="hint3">Cần gợi ý?</button>
-    <div class="hintBox hidden" id="hint3">Gõ công thức vào một ô trống, ví dụ ô N3. Nếu Excel báo lỗi <span class="fx">#NAME?</span> thì em gõ thiếu dấu bằng hoặc sai tên hàm. Nếu kết quả là 0 ở câu thứ hai thì em đang làm đúng — đó chính là điều bài học muốn em phát hiện.</div>
+    <div class="hintBox noCopy hidden" id="hint3"><div class="hintLevel hidden"><strong>Gợi ý 1:</strong> Mã phản hồi ở cột A là chữ, còn giờ vận động và giờ ngủ là số. Chọn hàm đếm theo loại dữ liệu trong cột.</div><div class="hintLevel hidden"><strong>Gợi ý 2:</strong> Cấu trúc cần tự hoàn thiện là <span class="fx">=TÊN_HÀM(vùng)</span>. Dùng COUNTA khi cần đếm mọi ô có nội dung; dùng COUNT khi chỉ đếm ô số. Vùng luôn đi từ hàng 3 đến 300.</div></div>
     <div class="feedback" id="fb3"></div>
     <div class="btnrow"><button class="btn btnSecondary" id="back3">← Chặng 2</button><button class="btn btnPrimary" id="action3">Kiểm tra</button></div>
   </div>
@@ -292,16 +296,16 @@ footer{padding:26px 0 50px;color:var(--muted);font-size:13px;text-align:center}
 
   <div class="callout warn">
     <strong>Chú ý chặng này làm trên hai sheet khác nhau</strong><br>
-    Hai câu đầu làm trên <span class="fx">Clean_Data</span>. Hai câu sau làm trên <span class="fx">Data</span> — bản gốc <em>chưa</em> làm sạch, để em thấy lỗi lộ ra như thế nào.
+    Hai câu đầu làm ở khối cột <span class="fx">M:P</span> trên <span class="fx">Clean_Data</span>. Hai câu sau làm ở khối cột <span class="fx">M:P</span> trên <span class="fx">Data</span> — bản gốc <em>chưa</em> làm sạch, để em thấy lỗi lộ ra như thế nào.
   </div>
 
   <div class="activity">
     <h3>Thử thách 4 · Tổng, trung bình và hai đầu của dãy số</h3>
     <div class="taskGrid" id="task4">
-      <div class="task"><div class="q"><b>Clean_Data · Tổng số bước chân của cả khối</b><span class="hintFx">=SUM(G3:G300)</span></div><input data-ans="1952348" data-tol="1" placeholder="kết quả"></div>
-      <div class="task"><div class="q"><b>Clean_Data · Trung bình giờ ngủ mỗi đêm (2 chữ số thập phân)</b><span class="hintFx">=AVERAGE(B3:B300)</span></div><input data-ans="7.21" data-tol="0.03" placeholder="ví dụ: 7.21"></div>
-      <div class="task"><div class="q"><b>Data · Điểm trung bình lớp 7 cao nhất</b><span class="hintFx">=MAX(H3:H300)</span></div><input data-ans="87" data-tol="0" placeholder="kết quả"></div>
-      <div class="task"><div class="q"><b>Data · Giờ ngủ mỗi đêm nhiều nhất</b><span class="hintFx">=MAX(B3:B300)</span></div><input data-ans="25" data-tol="0" placeholder="kết quả"></div>
+      <div class="task"><div class="q"><b>Clean_Data · Tổng số bước chân của cả khối</b></div><input data-ans="1952348" data-tol="1" placeholder="kết quả"></div>
+      <div class="task"><div class="q"><b>Clean_Data · Trung bình giờ ngủ mỗi đêm (2 chữ số thập phân)</b></div><input data-ans="7.21" data-tol="0.03" placeholder="ví dụ: 7.21"></div>
+      <div class="task"><div class="q"><b>Data · Điểm trung bình lớp 7 cao nhất</b></div><input data-ans="87" data-tol="0" placeholder="kết quả"></div>
+      <div class="task"><div class="q"><b>Data · Giờ ngủ mỗi đêm nhiều nhất</b></div><input data-ans="25" data-tol="0" placeholder="kết quả"></div>
     </div>
     <div class="matchGrid" style="margin-top:14px">
       <div class="term">Trên <span class="fx">Clean_Data</span>, <span class="fx">=SUM(B3:B300)/298</span> cho 7.09 còn <span class="fx">=AVERAGE(B3:B300)</span> cho 7.21. Vì sao lệch nhau?</div>
@@ -311,7 +315,7 @@ footer{padding:26px 0 50px;color:var(--muted);font-size:13px;text-align:center}
       <select id="why4b" data-key="b"><option value="">Chọn...</option><option value="a">Có một bạn học rất giỏi và một bạn ngủ rất nhiều</option><option value="b">Có ít nhất hai ô nhập sai: điểm 87 vượt thang điểm 10 và 25 giờ ngủ vượt số giờ của một ngày</option><option value="c">Dữ liệu vẫn tốt, chỉ là hai bạn đặc biệt</option><option value="d">Excel tính sai hàm MAX</option></select>
     </div>
     <button class="hintBtn" data-hint="hint4">Cần gợi ý?</button>
-    <div class="hintBox hidden" id="hint4">Nhớ bấm đúng tab sheet ở đáy cửa sổ Excel trước khi gõ công thức. Kết quả trung bình có thể hiện ra nhiều chữ số — em chỉ cần lấy 2 chữ số thập phân, gõ dấu phẩy hay dấu chấm đều được.</div>
+    <div class="hintBox noCopy hidden" id="hint4"><div class="hintLevel hidden"><strong>Gợi ý 1:</strong> Gạch chân động từ trong từng câu: tổng, trung bình, cao nhất. Động từ cho biết hàm; tên cột cho biết vùng.</div><div class="hintLevel hidden"><strong>Gợi ý 2:</strong> Số bước chân ở G, giờ ngủ ở B, điểm ở H. Hai câu đầu dùng Clean_Data; hai câu sau dùng Data để lỗi 87 và 25 lộ ra. Tự ghép tên hàm với vùng hàng 3 đến 300.</div></div>
     <div class="feedback" id="fb4"></div>
     <div class="btnrow"><button class="btn btnSecondary" id="back4">← Chặng 3</button><button class="btn btnPrimary" id="action4">Kiểm tra</button></div>
   </div>
@@ -329,16 +333,16 @@ footer{padding:26px 0 50px;color:var(--muted);font-size:13px;text-align:center}
   <div class="callout blue">
     <strong>Thí nghiệm của chặng này</strong><br>
     Trên sheet <span class="fx">Data</span> còn một ô ghi 152 000 bước chân/ngày. Sheet <span class="fx">Clean_Data</span> đã để trống ô đó.<br>
-    Em sẽ tính AVERAGE và MEDIAN của cột <em>Số bước chân</em> (cột G) trên <strong>cả hai sheet</strong>, rồi so xem hàm nào bị con số sai làm cho lệch.
+    Em sẽ tính AVERAGE và MEDIAN của cột <em>Số bước chân</em> (cột G) trên <strong>cả hai sheet</strong>. Ở mỗi sheet, làm trong khối yêu cầu cột <span class="fx">M:P</span>, rồi so xem hàm nào bị con số sai làm cho lệch.
   </div>
 
   <div class="activity">
     <h3>Thử thách 5 · Bốn con số và một kết luận</h3>
     <div class="taskGrid" id="task5">
-      <div class="task"><div class="q"><b>Data · trung bình số bước chân</b><span class="hintFx">=AVERAGE(G3:G300)</span></div><input data-ans="7061.57" data-tol="1" placeholder="ví dụ: 7061.57"></div>
-      <div class="task"><div class="q"><b>Data · trung vị số bước chân</b><span class="hintFx">=MEDIAN(G3:G300)</span></div><input data-ans="6606" data-tol="1" placeholder="kết quả"></div>
-      <div class="task"><div class="q"><b>Clean_Data · trung bình số bước chân</b><span class="hintFx">=AVERAGE(G3:G300)</span></div><input data-ans="6573.56" data-tol="1" placeholder="ví dụ: 6573.56"></div>
-      <div class="task"><div class="q"><b>Clean_Data · trung vị số bước chân</b><span class="hintFx">=MEDIAN(G3:G300)</span></div><input data-ans="6602" data-tol="1" placeholder="kết quả"></div>
+      <div class="task"><div class="q"><b>Data · trung bình số bước chân</b></div><input data-ans="7061.57" data-tol="1" placeholder="ví dụ: 7061.57"></div>
+      <div class="task"><div class="q"><b>Data · trung vị số bước chân</b></div><input data-ans="6606" data-tol="1" placeholder="kết quả"></div>
+      <div class="task"><div class="q"><b>Clean_Data · trung bình số bước chân</b></div><input data-ans="6573.56" data-tol="1" placeholder="ví dụ: 6573.56"></div>
+      <div class="task"><div class="q"><b>Clean_Data · trung vị số bước chân</b></div><input data-ans="6602" data-tol="1" placeholder="kết quả"></div>
     </div>
     <div class="matchGrid" style="margin-top:14px">
       <div class="term">So bốn con số vừa tính. Kết luận nào đúng?</div>
@@ -348,7 +352,7 @@ footer{padding:26px 0 50px;color:var(--muted);font-size:13px;text-align:center}
       <select id="why5b" data-key="a"><option value="">Chọn...</option><option value="a">Làm sạch dữ liệu trước, rồi ghi kèm cả trung vị để người đọc biết có con số lạ nào kéo lệch hay không</option><option value="b">Dùng luôn dữ liệu gốc cho nhanh, sai số không đáng kể</option><option value="c">Chỉ báo cáo giá trị lớn nhất vì nó ấn tượng nhất</option><option value="d">Xóa hết những bạn có số bước chân cao hơn trung bình</option></select>
     </div>
     <button class="hintBtn" data-hint="hint5">Cần gợi ý?</button>
-    <div class="hintBox hidden" id="hint5">Làm lần lượt: bấm tab <span class="fx">Data</span>, gõ hai công thức, ghi kết quả ra giấy. Rồi bấm tab <span class="fx">Clean_Data</span>, gõ đúng hai công thức đó. Vùng <span class="fx">G3:G300</span> giống nhau ở cả hai sheet.</div>
+    <div class="hintBox noCopy hidden" id="hint5"><div class="hintLevel hidden"><strong>Gợi ý 1:</strong> Tạo một bảng 2 × 2 trên giấy: hai hàng là Data và Clean_Data; hai cột là trung bình và trung vị. Tính theo đúng thứ tự đó để dễ so sánh.</div><div class="hintLevel hidden"><strong>Gợi ý 2:</strong> Cả bốn phép tính đều dùng cột G, hàng 3 đến 300. Chỉ đổi hàm giữa AVERAGE và MEDIAN, rồi đổi sheet; không đổi vùng.</div></div>
     <div class="feedback" id="fb5"></div>
     <div class="btnrow"><button class="btn btnSecondary" id="back5">← Chặng 4</button><button class="btn btnPrimary" id="action5">Kiểm tra</button></div>
   </div>
@@ -431,7 +435,7 @@ function stageCheck(taskId,selIds,okMsg){
   const parts=[];
   if(!t.ok)parts.push(`${t.wrong} ô kết quả`);
   if(c.wrong)parts.push(`${c.wrong} câu chọn`);
-  return{ok:false,msg:`✗ Chỗ tô đỏ chưa đúng (${parts.join(' và ')}). Gợi ý đã hiện ra dưới câu hỏi sai.`};
+  return{ok:false,msg:`✗ Chỗ tô đỏ chưa đúng (${parts.join(' và ')}). Hãy mở Gợi ý 1, thử lại, rồi mới xem Gợi ý 2 nếu vẫn cần.`};
 }
 function matchCheck(matchId,okMsg,wrongMsg){
   const c=checkMatch(document.getElementById(matchId));
@@ -469,7 +473,9 @@ document.getElementById('startBtn').onclick=()=>{
   state.student={name,cls};fb.textContent='';showStep(1);
 };
 [['back2',1],['back3',2],['back4',3],['back5',4]].forEach(([id,n])=>{const b=document.getElementById(id);if(b)b.onclick=()=>showStep(n)});
-document.querySelectorAll('.hintBtn').forEach(b=>{b.onclick=()=>{const box=document.getElementById(b.dataset.hint);box.classList.toggle('hidden');b.textContent=box.classList.contains('hidden')?'Cần gợi ý?':'Ẩn gợi ý'}});
+document.querySelectorAll('.hintBtn').forEach(b=>{const box=document.getElementById(b.dataset.hint),levels=[...box.querySelectorAll('.hintLevel')];let level=0;b.onclick=()=>{if(level===0){box.classList.remove('hidden');levels[0]?.classList.remove('hidden');level=1;b.textContent='Xem gợi ý 2'}else if(level===1){levels[1]?.classList.remove('hidden');level=2;b.textContent='Ẩn gợi ý'}else{box.classList.add('hidden');levels.forEach(x=>x.classList.add('hidden'));level=0;b.textContent='Cần gợi ý?'}}});
+document.addEventListener('copy',e=>{const s=window.getSelection(),n=s&&s.anchorNode,el=n&&(n.nodeType===1?n:n.parentElement);if(el&&el.closest('.noCopy'))e.preventDefault()});
+document.addEventListener('contextmenu',e=>{if(e.target.closest('.noCopy'))e.preventDefault()});
 
 function setStageAction(btnId,fbId,nextStep,validator,wrongText){
   const btn=document.getElementById(btnId),fb=document.getElementById(fbId);
@@ -508,30 +514,39 @@ setStageAction('action5','fb5',6,()=>stageCheck('task5',['why5','why5b'],
 
 /* ================= NGÂN HÀNG CÂU HỎI ================= */
 const BANK=[
- {type:'mcq',q:'Ô C4 ghi "3,2" và nội dung căn về lề trái. Đây là lỗi gì?',options:[['Số bị ghi thành chữ','k'],['Ô trống','x'],['Giá trị vô lý','x'],['Dòng bị nhập trùng','x']],key:'k'},
+ {type:'scenario',q:'Tình huống: Ô C4 ghi "3,2" và nội dung căn về lề trái. Em phân loại lỗi này thế nào?',options:[['Số bị ghi thành chữ','k'],['Ô trống','x'],['Giá trị vô lý','x'],['Dòng bị nhập trùng','x']],key:'k'},
  {type:'mcq',q:'Một bạn ghi giờ ngủ mỗi đêm là 25. Cách xử lý đúng theo nguyên tắc làm sạch dữ liệu là gì?',options:[['Để trống ô đó và ghi lý do vào nhật ký làm sạch','k'],['Sửa thành 12 giờ cho hợp lý','x'],['Xóa luôn cả dòng phản hồi đó','x'],['Giữ nguyên vì đó là dữ liệu người ta trả lời','x']],key:'k'},
- {type:'mcq',q:'Trong bộ dữ liệu khối 8, một bạn ghi ngủ 4.5 giờ mỗi đêm — thấp hơn hẳn các bạn khác. Nên làm gì?',options:[['Giữ nguyên, vì hiếm nhưng vẫn có thể xảy ra','k'],['Để trống vì con số quá thấp','x'],['Thay bằng điểm trung bình của cả lớp','x'],['Xóa dòng đó khỏi bảng','x']],key:'k'},
+ {type:'scenario',q:'Tình huống: Một bạn ghi ngủ 4.5 giờ mỗi đêm — thấp hơn hẳn các bạn khác. Nên làm gì?',options:[['Giữ nguyên; giá trị hiếm vẫn có thể đúng','k'],['Để trống vì con số quá thấp','x'],['Thay bằng mức ngủ trung bình của khối','x'],['Xóa dòng đó khỏi bảng dữ liệu','x']],key:'k'},
  {type:'mcq',q:'Hàm nào đếm được cả ô chứa chữ lẫn ô chứa số?',options:[['COUNTA','k'],['COUNT','x'],['SUM','x'],['MEDIAN','x']],key:'k'},
  {type:'mcq',q:'Cột A chứa mã phản hồi R001, R002… Công thức =COUNT(A3:A300) trả về kết quả nào?',options:[['0','k'],['298','x'],['300','x'],['Báo lỗi #VALUE!','x']],key:'k'},
- {type:'mcq',q:'Trên một cột đáng lẽ toàn số, COUNTA cho 298 còn COUNT cho 293. Điều đó cho biết gì?',options:[['Có 5 ô đang bị ghi thành chữ chứ không phải số','k'],['Có 5 ô trống hoàn toàn','x'],['Cột đó có 5 giá trị vô lý','x'],['Công thức đã gõ sai vùng dữ liệu','x']],key:'k'},
+ {type:'scenario',q:'Tình huống: Trên một cột đáng lẽ toàn số, COUNTA cho 298 còn COUNT cho 293. Em nghi ngờ điều gì?',options:[['Có 5 ô chứa chữ thay vì số','k'],['Có 5 ô trống hoàn toàn','x'],['Có 5 giá trị chắc chắn vô lý','x'],['Vùng tính chắc chắn bị lệch hàng','x']],key:'k'},
  {type:'mcq',q:'Dữ liệu bắt đầu ở hàng 3 và kết thúc ở hàng 300. Vùng nào đúng cho cột G?',options:[['G3:G300','k'],['G1:G300','x'],['G2:G299','x'],['G3:G299','x']],key:'k'},
  {type:'mcq',q:'Vì sao không nên đưa hàng 2 vào vùng tính toán?',options:[['Vì hàng 2 chứa tên cột chứ không phải dữ liệu','k'],['Vì Excel không tính được hàng 2','x'],['Vì hàng 2 luôn bị khóa','x'],['Vì như vậy sẽ thiếu mất một phản hồi','x']],key:'k'},
- {type:'mcq',q:'Gõ SUM(G3:G300) mà không có dấu bằng ở đầu thì Excel sẽ làm gì?',options:[['Hiểu đó là một đoạn chữ và hiện lại y nguyên','k'],['Vẫn tính ra tổng bình thường','x'],['Báo lỗi #DIV/0!','x'],['Tự động thêm dấu bằng vào','x']],key:'k'},
+ {type:'tf',q:'Đúng hay sai: Nếu gõ SUM(G3:G300) mà không có dấu bằng ở đầu, Excel vẫn tính ra tổng.',options:[['Đúng','x'],['Sai','k']],key:'k'},
  {type:'mcq',q:'Cột B có 5 ô trống trong tổng số 298 hàng dữ liệu. Hàm =AVERAGE(B3:B300) chia tổng cho bao nhiêu?',options:[['293','k'],['298','x'],['300','x'],['5','x']],key:'k'},
  {type:'mcq',q:'Muốn biết trong một cột có giá trị nhập sai kiểu "điểm 87 trên thang 10" hay không, nên dùng hàm nào trước tiên?',options:[['MAX và MIN','k'],['SUM và AVERAGE','x'],['COUNT và COUNTA','x'],['MEDIAN','x']],key:'k'},
  {type:'mcq',q:'Một ô nhập nhầm 152 000 bước chân/ngày còn nằm trong dữ liệu. Hàm nào bị con số đó làm lệch nhiều nhất?',options:[['AVERAGE','k'],['MEDIAN','x'],['COUNT','x'],['COUNTA','x']],key:'k'},
  {type:'mcq',q:'MEDIAN của một cột là gì?',options:[['Con số đứng giữa khi xếp tất cả các số từ nhỏ đến lớn','k'],['Con số xuất hiện nhiều lần nhất','x'],['Trung bình cộng của số lớn nhất và số nhỏ nhất','x'],['Tổng chia cho số phần tử','x']],key:'k'},
  {type:'mcq',q:'Trên dữ liệu bẩn, trung bình số bước chân là 7061.6; sau khi làm sạch còn 6573.6. Trung vị thì đổi từ 6 606 xuống 6 602. Kết luận nào đúng?',options:[['Trung vị ổn định hơn trung bình khi dữ liệu có giá trị cực đoan','k'],['Trung bình luôn chính xác hơn trung vị','x'],['Cả hai hàm đều bị ảnh hưởng như nhau','x'],['Làm sạch dữ liệu không thay đổi kết quả','x']],key:'k'},
  {type:'mcq',q:'Nếu báo cáo số bước chân trung bình mà không làm sạch dữ liệu trước, hậu quả là gì?',options:[['Kết luận về cả khối bị sai lệch vì một ô nhập nhầm','k'],['Không sao cả, một ô không ảnh hưởng gì','x'],['Excel sẽ tự động cảnh báo','x'],['Kết quả vẫn đúng nhưng chạy chậm hơn','x']],key:'k'},
- {type:'mcq',q:'Hai dòng R245 và R257 giống hệt nhau ở cả 10 cột trong một khảo sát ẩn danh. Cách xử lý phù hợp nhất là gì?',options:[['Giữ cả hai và ghi chú lại, vì chưa đủ bằng chứng kết luận cùng một người','k'],['Xóa ngay một dòng','x'],['Xóa cả hai dòng cho chắc','x'],['Sửa vài giá trị cho hai dòng khác nhau','x']],key:'k'},
- {type:'mcq',q:'Ô trống trong cột Giờ vận động có ý nghĩa gì?',options:[['Bạn đó không trả lời câu hỏi này','k'],['Bạn đó vận động 0 giờ mỗi tuần','x'],['Excel đã xóa mất giá trị','x'],['Giá trị quá nhỏ nên không hiển thị','x']],key:'k'},
+ {type:'scenario',q:'Tình huống: Hai dòng R245 và R257 giống hệt nhau ở cả 10 cột của khảo sát ẩn danh. Nên xử lý thế nào?',options:[['Giữ cả hai và ghi chú vì chưa đủ bằng chứng','k'],['Xóa ngay một dòng vì chắc chắn bị trùng','x'],['Xóa cả hai dòng để tránh làm lệch dữ liệu','x'],['Sửa vài ô để hai dòng trở nên khác nhau','x']],key:'k'},
+ {type:'tf',q:'Đúng hay sai: Ô trống trong cột Giờ vận động được hiểu là bạn đó vận động 0 giờ mỗi tuần.',options:[['Đúng','x'],['Sai','k']],key:'k'},
  {type:'mcq',q:'Công thức nào tính tổng số bước chân của toàn bộ 298 phản hồi?',options:[['=SUM(G3:G300)','k'],['=COUNT(G3:G300)','x'],['=AVERAGE(G3:G300)','x'],['=MAX(G3:G300)','x']],key:'k'},
- {type:'mcq',q:'Sau khi làm sạch, cột Giờ vận động chỉ còn 291 giá trị số trên 298 phản hồi. Khi viết nhận xét, cần lưu ý gì?',options:[['Ghi rõ kết quả dựa trên 291 bạn có trả lời, không phải toàn bộ 298 bạn','k'],['Coi như cả 298 bạn đều đã trả lời','x'],['Điền số 0 vào 7 ô trống rồi tính lại','x'],['Bỏ hẳn cột này khỏi báo cáo','x']],key:'k'},
+ {type:'scenario',q:'Tình huống: Cột Giờ vận động còn 291 giá trị số trên 298 phản hồi. Khi viết nhận xét, em ghi gì?',options:[['Kết quả dựa trên 291 bạn có trả lời','k'],['Kết quả đại diện đủ cho cả 298 bạn','x'],['Bảy ô trống được tính là 0 giờ','x'],['Cột này không thể dùng để báo cáo','x']],key:'k'},
  {type:'mcq',q:'Nguyên tắc nào KHÔNG thuộc về làm sạch dữ liệu đúng cách?',options:[['Tự đoán giá trị hợp lý rồi điền vào ô trống','k'],['Ghi lại mọi thay đổi kèm lý do','x'],['Giữ nguyên bản dữ liệu gốc làm bằng chứng','x'],['Chỉ sửa khi ý nghĩa của giá trị đã rõ ràng','x']],key:'k'}
 ];
 
 /* ================= BÀI KIỂM TRA ================= */
-function buildQuizSet(){return shuffle(BANK).slice(0,10)}
+function answerLengthBalanced(q){if(!q.options||q.options.length<=2)return true;const lens=q.options.map(([text])=>text.length),correct=q.options.findIndex(([,key])=>key==='k'),max=Math.max(...lens);return !(lens[correct]===max&&lens.filter(n=>n===max).length===1)}
+function buildQuizSet(){
+  const chosen=[],take=(pool,n)=>shuffle(pool.filter(q=>!chosen.includes(q))).slice(0,Math.max(0,n)).forEach(q=>chosen.push(q));
+  take(BANK.filter(q=>q.type==='tf'),2);
+  take(BANK.filter(q=>q.type==='scenario'&&answerLengthBalanced(q)),2);
+  take(BANK.filter(q=>q.type==='scenario'),2-chosen.filter(q=>q.type==='scenario').length);
+  take(BANK.filter(answerLengthBalanced),10-chosen.length);
+  take(BANK,10-chosen.length);
+  return shuffle(chosen);
+}
 function startQuiz(){
   state.quizSet=buildQuizSet();state.quizIndex=0;state.answers=[];state.quizChecked=false;
   document.getElementById('resultArea').classList.add('hidden');
@@ -542,7 +557,8 @@ function renderQ(){
   const q=state.quizSet[state.quizIndex];
   q._opts=shuffle(q.options);
   state.quizChecked=false;
-  document.getElementById('qnum').textContent=`Câu ${state.quizIndex+1}/10`;
+  const kind=q.type==='tf'?'Đúng / Sai':q.type==='scenario'?'Tình huống':'Trắc nghiệm';
+  document.getElementById('qnum').textContent=`Câu ${state.quizIndex+1}/10 · ${kind}`;
   document.getElementById('qtext').textContent=q.q;
   const body=document.getElementById('qbody');body.innerHTML='';
   const fb=document.getElementById('qfeedback');fb.className='feedback hidden';fb.innerHTML='';
